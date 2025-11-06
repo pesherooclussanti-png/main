@@ -1,135 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WikiEditor - Crie suas páginas estilo Wikipedia</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latina Vídeos</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-left">
-            <div class="logo">
-                <span class="logo-icon">W</span>
-                <div class="logo-text">
-                    <h1>WikiEditor</h1>
-                    <p>Crie suas páginas estilo Wikipedia</p>
-                </div>
-            </div>
-        </div>
-        <div class="header-right">
-            <button id="btnSalvar" class="btn btn-primary">📘 Salvar</button>
-            <button id="btnCarregar" class="btn btn-secondary">📂 Carregar</button>
-            <button id="btnNovaPagina" class="btn btn-secondary">📄 Nova Página</button>
-        </div>
-    </header>
+  <header>
+    <h1>🎬 Latina Vídeos</h1>
+    <input type="text" id="search" placeholder="Buscar vídeo ou imagem...">
+  </header>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <!-- Ferramentas -->
-            <section class="sidebar-section">
-                <h3 class="sidebar-title">🛠️ Ferramentas</h3>
-                <ul class="sidebar-list">
-                    <li><button class="tool-btn" data-tool="titulo">✏️ Título</button></li>
-                    <li><button class="tool-btn" data-tool="subtitulo">🖊️ Subtítulo</button></li>
-                    <li><button class="tool-btn" data-tool="paragrafo">📝 Parágrafo</button></li>
-                    <li><button class="tool-btn" data-tool="tabela">📊 Tabela</button></li>
-                    <li><button class="tool-btn" data-tool="imagem">🖼️ Imagem</button></li>
-                    <li><button class="tool-btn" data-tool="lista">📋 Lista</button></li>
-                    <li><button class="tool-btn" data-tool="infobox">ℹ️ Infobox</button></li>
-                    <li><button class="tool-btn" data-tool="citacao">💬 Citação</button></li>
-                    <li><button class="tool-btn" data-tool="codigo">💻 Código</button></li>
-                    <li><button class="tool-btn" data-tool="referencia">🔗 Referência</button></li>
-                    <li><button class="tool-btn" data-tool="divisor">➖ Divisor</button></li>
-                    <li><button class="tool-btn" data-tool="audio">🔊 Áudio</button></li>
-                </ul>
-            </section>
+  <main id="gallery"></main>
 
-            <!-- Páginas Salvas -->
-            <section class="sidebar-section">
-                <h3 class="sidebar-title">💾 Páginas Salvas</h3>
-                <div id="paginasSalvas" class="saved-pages">
-                    <p class="empty-message">Nenhuma página salva</p>
-                </div>
-            </section>
+  <footer>
+    <p>© 2025 Latina Media | Feito com 💛 por Peshero Oclus Santi</p>
+  </footer>
 
-            <!-- Índice -->
-            <section class="sidebar-section">
-                <h3 class="sidebar-title">📑 Índice</h3>
-                <div id="indice" class="index-content">
-                    <p class="empty-message">Adicione títulos para gerar o índice</p>
-                </div>
-            </section>
+  <script src="videos.js"></script>
+  <script>
+    const galeria = document.getElementById("gallery");
+    const busca = document.getElementById("search");
 
-            <!-- Exportar -->
-            <section class="sidebar-section">
-                <h3 class="sidebar-title">📤 Exportar</h3>
-                <ul class="sidebar-list">
-                    <li><button id="btnExportarHTMLEditavel" class="export-btn">✏️ Exportar HTML (Editável)</button></li>
-                    <li><button id="btnExportarHTML" class="export-btn">📄 Exportar HTML (Não Editável)</button></li>
-                    <li><button id="btnGerarPDF" class="export-btn">📕 Gerar PDF</button></li>
-                    <li><button id="btnImprimir" class="export-btn">🖨️ Imprimir</button></li>
-                </ul>
-            </section>
+    function mostrar(lista) {
+      galeria.innerHTML = "";
+      lista.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "card";
 
-            <!-- Gerenciar -->
-            <section class="sidebar-section">
-                <h3 class="sidebar-title">⚙️ Gerenciar</h3>
-                <ul class="sidebar-list">
-                    <li><button id="btnLimparConteudo" class="manage-btn">🧹 Limpar Conteúdo</button></li>
-                    <li><button id="btnApagarTudo" class="manage-btn danger">🗑️ Apagar Tudo</button></li>
-                </ul>
-            </section>
-        </aside>
+        if (item.tipo === "vídeo") {
+          card.innerHTML = `
+            <iframe src="${item.link}" allow="autoplay" loading="lazy"></iframe>
+            <h3>${item.nome}</h3>
+          `;
+        } else {
+          card.innerHTML = `
+            <img src="${item.link}" alt="${item.nome}" loading="lazy">
+            <h3>${item.nome}</h3>
+          `;
+        }
+        galeria.appendChild(card);
+      });
+    }
 
-        <!-- Content Area -->
-        <main class="content-area">
-            <div id="articleContent" class="article-content">
-                <div class="welcome-box">
-                    <h2>👋 Bem-vindo ao Editor Wikipedia Aprimorado!</h2>
-                    <p>Use as ferramentas da barra lateral para começar a criar seu artigo. Você pode adicionar:</p>
-                    <ul>
-                        <li>Títulos e subtítulos para organizar o conteúdo</li>
-                        <li>Parágrafos de texto editáveis</li>
-                        <li>Tabelas para dados estruturados (com edição avançada)</li>
-                        <li>Imagens com legendas (redimensionáveis)</li>
-                        <li>Listas ordenadas e não ordenadas</li>
-                        <li>Infoboxes informativos</li>
-                        <li>Citações e blocos de código</li>
-                        <li>Referências e divisores</li>
-                        <li>Áudio (locais ou externos)</li>
-                    </ul>
-                    <h3>Novos Recursos:</h3>
-                    <ul>
-                        <li>✨ Cada componente pode ser apagado individualmente</li>
-                        <li>🔄 Componentes podem ser redimensionados (imagens, tabelas, infoboxes)</li>
-                        <li>📊 Tabelas podem ser editadas sem apagar (adicionar/remover linhas e colunas)</li>
-                        <li>📤 Exportação HTML não editável (sem controles de edição)</li>
-                        <li>📕 Exportação digital mantida com performance otimizada</li>
-                    </ul>
-                    <p><strong>Dica:</strong> Todos os elementos são editáveis. Clique para editar o conteúdo diretamente!</p>
-                </div>
-            </div>
-        </main>
-    </div>
+    busca.addEventListener("input", () => {
+      const termo = busca.value.toLowerCase();
+      const filtrados = midias.filter(m => m.nome.toLowerCase().includes(termo));
+      mostrar(filtrados);
+    });
 
-    <!-- Modal para entrada de dados -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle">Título do Modal</h2>
-            <div id="modalBody"></div>
-            <div class="modal-footer">
-                <button id="modalConfirm" class="btn btn-primary">Confirmar</button>
-                <button id="modalCancel" class="btn btn-secondary">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+    mostrar(midias);
+  </script>
 </body>
 </html>
-
