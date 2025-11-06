@@ -1,56 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Latina Vídeos</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Filmes Latinos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>🎬 Latina Vídeos</h1>
-    <input type="text" id="search" placeholder="Buscar vídeo ou imagem...">
-  </header>
+    <h1>Filmes Latinos</h1>
+    <div id="video-list"></div>
 
-  <main id="gallery"></main>
-
-  <footer>
-    <p>© 2025 Latina Media | Feito com 💛 por Peshero Oclus Santi</p>
-  </footer>
-
-  <script src="videos.js"></script>
-  <script>
-    const galeria = document.getElementById("gallery");
-    const busca = document.getElementById("search");
-
-    function mostrar(lista) {
-      galeria.innerHTML = "";
-      lista.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "card";
-
-        if (item.tipo === "vídeo") {
-          card.innerHTML = `
-            <iframe src="${item.link}" allow="autoplay" loading="lazy"></iframe>
-            <h3>${item.nome}</h3>
-          `;
-        } else {
-          card.innerHTML = `
-            <img src="${item.link}" alt="${item.nome}" loading="lazy">
-            <h3>${item.nome}</h3>
-          `;
-        }
-        galeria.appendChild(card);
-      });
-    }
-
-    busca.addEventListener("input", () => {
-      const termo = busca.value.toLowerCase();
-      const filtrados = midias.filter(m => m.nome.toLowerCase().includes(termo));
-      mostrar(filtrados);
-    });
-
-    mostrar(midias);
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
