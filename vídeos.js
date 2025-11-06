@@ -1,21 +1,13 @@
-// Lista de vídeos e imagens da pasta do Google Drive
-// Use links do tipo “https://drive.google.com/file/d/ID/preview” para vídeos
-// E “https://drive.google.com/uc?id=ID” para imagens
-
+// videos.js
 const midias = [
   {
-    nome: "Latina — Céu",
+    nome: "Latina – Filme 1",
     tipo: "vídeo",
-    link: "https://drive.google.com/file/d/SEU_ID_DO_VIDEO1/preview"
+    link: "https://drive.google.com/file/d/1ABCDefGhIjkLMnoP/preview"
   },
   {
-    nome: "Latina — Nuvem",
+    nome: "Latina – Filme 2",
     tipo: "vídeo",
-    link: "https://drive.google.com/file/d/SEU_ID_DO_VIDEO2/preview"
-  },
-  {
-    nome: "Latina — Bandeira",
-    tipo: "imagem",
-    link: "https://drive.google.com/uc?id=SEU_ID_DA_IMAGEM1"
+    link: "https://drive.google.com/file/d/1XYZuvwQrsTuVWxYz/preview"
   }
 ];
